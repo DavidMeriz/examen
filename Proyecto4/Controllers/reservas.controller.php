@@ -1,5 +1,5 @@
 <?php
-require_once('../Models/cls_reservas.models.php');
+require_once('../Models/cls_reservas.model.php');
 $reservas = new Clase_Reservas;
 switch ($_GET["op"]) {
     case 'todos':

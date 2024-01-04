@@ -1,5 +1,5 @@
 <?php
-require_once('../Models/cls_paises.models.php');
+require_once('../Models/cls_paises.model.php');
 $clientes = new Clase_Clientes;
 switch ($_GET["op"]) {
     case 'todos':

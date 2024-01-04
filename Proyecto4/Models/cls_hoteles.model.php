@@ -35,7 +35,7 @@ class Clase_Hoteles
         try {
             $con = new Clase_Conectar_Base_Datos();
             $con = $con->ProcedimientoConectar();
-            $cadena = "INSERT INTO `hoteles`(`ID_hotel`, `Nombre`, `Ciudad`, `Estrellas`) VALUES ('$Nombre','$Ciudad','$Estrellas')";
+            $cadena = "INSERT INTO `hoteles`(`Nombre`, `Ciudad`, `Estrellas`) VALUES ('$Nombre','$Ciudad','$Estrellas')";
             $result = mysqli_query($con, $cadena);
             return 'ok';
         } catch (Throwable $th) {
@@ -72,7 +72,4 @@ class Clase_Hoteles
             $con->close();
         }
     }
-
-
-
 }

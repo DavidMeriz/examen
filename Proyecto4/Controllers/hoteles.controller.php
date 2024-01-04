@@ -1,5 +1,5 @@
 <?php
-require_once('../Models/cls_hoteles.models.php');
+require_once('../Models/cls_hoteles.model.php');
 $hoteles = new Clase_Hoteles;
 switch ($_GET["op"]) {
     case 'todos':

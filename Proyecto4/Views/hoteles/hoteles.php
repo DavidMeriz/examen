@@ -5,11 +5,11 @@
     <div class="col-lg-8 d-flex align-items-stretch">
         <div class="card w-100">
             <div class="card-body p-4">
-                <h5 class="card-title fw-semibold mb-4">Lista de Clientes</h5>
+                <h5 class="card-title fw-semibold mb-4">Lista de Hoteles</h5>
 
                 <div class="table-responsive">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal_clientes">
-                        Nuevo Cliente
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal_hoteles">
+                        Nuevo Hotel
                     </button>
                     <table class="table text-nowrap mb-0 align-middle">
                         <thead class="text-dark fs-4">
@@ -21,23 +21,17 @@
                                     <h6 class="fw-semibold mb-0">Nombre</h6>
                                 </th>
                                 <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Apellido</h6>
+                                    <h6 class="fw-semibold mb-0">Ciudad</h6>
                                 </th>
                                 <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Hotel</h6>
-                                </th>
-                                <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Fecha inicio</h6>
-                                </th>
-                                <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Fecha salida</h6>
+                                    <h6 class="fw-semibold mb-0">Estrellas</h6>
                                 </th>
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Opciones</h6>
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="tabla_clientes">
+                        <tbody id="tabla_hoteles">
 
                         </tbody>
                     </table>
@@ -48,36 +42,28 @@
 </div>
 
 <!-- Ventana Modal-->
-
-<!-- Button trigger modal -->
-
-
-<!-- Modal -->
-<div class="modal fade" id="Modal_clientes" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="Modal_hoteles" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="post" id="frm_clientes">
+            <form method="post" id="frm_hoteles">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Clientes</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Hoteles</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
-                    <input type="hidden" name="ID_hotel  " id="ID_hotel ">
-                        <div class="form-group">
-                        <label for="ID_hotel">Nombre del Hotel</label>
-                        <option value="0">Seleccione un Hotel</option>"
+                    <input type="hidden" name="ID_hotel" id="ID_hotel">
+                    <div class="form-group">
+                        <label for="nombre">Nombre del Hotel</label>
+                        <input type="text" required class="form-control" id="Nombre" name="Nombre" placeholder="Ingrese el nombre del hotel">
                     </div>
                     <div class="form-group">
-                        <label for="fechainicio">Fecha de inicio </label>
-                        <input type="date" required class="form-control" id="fechainicio" name="fechainicio" placeholder="Ingrese la Fecha de inicio">
+                        <label for="ciudad">Ciudad</label>
+                        <input type="text" required class="form-control" id="Ciudad" name="Ciudad" placeholder="Ingrese la ciudad">
                     </div>
                     <div class="form-group">
-                        <label for="fechasalida">Fecha de salida </label>
-                        <input type="date" required class="form-control" id="fechasalida" name="fechasalida" placeholder="Ingrese la Fecha de salida">
+                        <label for="estrellas">Estrellas</label>
+                        <input type="number" required class="form-control" id="Estrellas" name="Estrellas" placeholder="Ingrese el número de estrellas">
                     </div>
-                   
-
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Grabar</button>
@@ -89,5 +75,4 @@
 </div>
 
 <?php require_once('../html/script2.php') ?>
-
-<script src="cliente.js"></script>
+<script src="hoteles.js"></script>

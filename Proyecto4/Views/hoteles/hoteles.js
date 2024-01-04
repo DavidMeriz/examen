@@ -1,7 +1,7 @@
 //aqui va a estar el codigo de usuarios.model.js
 
 function init(){
-    $("#frm_paises").on("submit", function(e){
+    $("#frm_hoteles").on("submit", function(e){
         guardaryeditar(e);
     });
 }
@@ -13,39 +13,44 @@ $().ready(()=>{
 
 var todos = () =>{
     var html = "";
-    $.get("../../Controllers/paises.controller.php?op=todos", (res) => {
+    $.get("../../Controllers/hoteles.controller.php?op=todos", (res) => {
+      
+      
       res = JSON.parse(res);
       $.each(res, (index, valor) => {
        
         html += `<tr>
                 <td>${index + 1}</td>
                 <td>${valor.Nombre}</td>
+                <td>${valor.Ciudad}</td>
+                <td>${valor.Estrellas}</td>
+
             <td>
             <button class='btn btn-success' onclick='editar(${
-              valor.PaisId
+              valor.ID_hotel
             })'>Editar</button>
             <button class='btn btn-danger' onclick='eliminar(${
-              valor.PaisId
+              valor.ID_hotel
             })'>Eliminar</button>
             <button class='btn btn-info' onclick='ver(${
-              valor.PaisId
+              valor.ID_hotel
             })'>Ver</button>
             </td></tr>
                 `;
       });
-      $("#tabla_paises").html(html);
+      $("#tabla_hoteles").html(html);
     });
   };
-
+  
   var guardaryeditar=(e)=>{
     e.preventDefault();
-    var dato = new FormData($("#frm_paises")[0]);
+    var dato = new FormData($("#frm_hoteles")[0]);
     var ruta = '';
-    var PaisId = document.getElementById("PaisId").value
-    if(PaisId > 0){
-     ruta = "../../Controllers/paises.controller.php?op=actualizar"
+    var ID_hotel = document.getElementById("ID_hotel").value
+    if(ID_hotel > 0){
+     ruta = "../../Controllers/hoteles.controller.php?op=actualizar"
     }else{
-        ruta = "../../Controllers/paises.controller.php?op=insertar"
+        ruta = "../../Controllers/hoteles.controller.php?op=insertar"
     }
     $.ajax({
         url: ruta,
@@ -54,38 +59,43 @@ var todos = () =>{
         contentType: false,
         processData: false,
         success: function (res) {
+
+          
           res = JSON.parse(res);
           if (res == "ok") {
-            Swal.fire("Paises", "Registrado con éxito" , "success");
+            Swal.fire("HOTELES", "Registrado con éxito" , "success");
             todos();
             limpia_Cajas();
           } else {
-            Swal.fire("usuarios", "Error al guardo, intente mas rtarde", "error");
+            Swal.fire("HOTELES", "Error al guardo, intente mas tarde", "error");
           }
         },
       });
   }
 
-  var editar = (PaisId)=>{
-    
+  var editar = (ID_hotel)=>{
+  
     $.post(
-      "../../Controllers/paises.controller.php?op=uno",
-      { PaisId: PaisId },
+      "../../Controllers/hoteles.controller.php?op=uno",
+      { ID_hotel: ID_hotel },
       (res) => {
         res = JSON.parse(res);
-        $("#PaisId").val(res.PaisId);
+        console.log(res);
+        $("#ID_hotel").val(res.ID_hotel);
         $("#Nombre").val(res.Nombre);
+        $("#Ciudad").val(res.Ciudad);
+        $("#Estrellas").val(res.Estrellas);
     
       }
     );
-    $("#Modal_paises").modal("show");
+    $("#Modal_hoteles").modal("show");
   }
 
 
-  var eliminar = (PaisId)=>{
+  var eliminar = (ID_hotel)=>{
     Swal.fire({
-        title: "Paises",
-        text: "Esta seguro de eliminar el pais",
+        title: "hoteles",
+        text: "Esta seguro de eliminar el HOTELES",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#d33",
@@ -94,12 +104,12 @@ var todos = () =>{
       }).then((result) => {
         if (result.isConfirmed) {
           $.post(
-            "../../Controllers/paises.controller.php?op=eliminar",
-            { PaisId: PaisId },
+            "../../Controllers/hoteles.controller.php?op=eliminar",
+            { ID_hotel: ID_hotel },
             (res) => {
               res = JSON.parse(res);
               if (res === "ok") {
-                Swal.fire("Paises", "Pais Eliminado", "success");
+                Swal.fire("HOTELES", "HOTELES Eliminado", "success");
                 todos();
               } else {
                 Swal.fire("Error", res, "error");
@@ -113,9 +123,11 @@ var todos = () =>{
 }
   
   var limpia_Cajas = ()=>{
-    document.getElementById("PaisId").value = "";
+    document.getElementById("ID_hotel").value = "";
     document.getElementById("Nombre").value = "";
-    $("#Modal_paises").modal("hide");
+    document.getElementById("Ciudad").value = "";
+    document.getElementById("Estrellas").value = "";
+    $("#Modal_hoteles").modal("hide");
   
   }
   init();
