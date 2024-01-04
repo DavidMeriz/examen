@@ -60,17 +60,18 @@
                 </div>
                 <div class="modal-body">
 
-                    <input type="hidden" name="ID_cliente  " id="ID_cliente ">
-
-
-                  
-                    <div class="form-group">
-                        <label for="nombre">Nombre del Cliente</label>
-                        <input type="text" required class="form-control" id="Nombre" name="Nombre" placeholder="Ingrese el Nombre del Cliente">
+                    <input type="hidden" name="ID_hotel  " id="ID_hotel ">
+                        <div class="form-group">
+                        <label for="ID_hotel">Nombre del Hotel</label>
+                        <option value="0">Seleccione un Hotel</option>"
                     </div>
                     <div class="form-group">
-                        <label for="apellido">Nombre del Cliente</label>
-                        <input type="text" required class="form-control" id="Apellios" name="Apellios" placeholder="Ingrese el Apellido">
+                        <label for="fechainicio">Fecha de inicio </label>
+                        <input type="date" required class="form-control" id="fechainicio" name="fechainicio" placeholder="Ingrese la Fecha de inicio">
+                    </div>
+                    <div class="form-group">
+                        <label for="fechasalida">Fecha de salida </label>
+                        <input type="date" required class="form-control" id="fechasalida" name="fechasalida" placeholder="Ingrese la Fecha de salida">
                     </div>
                    
 
