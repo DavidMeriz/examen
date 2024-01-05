@@ -18,14 +18,18 @@
                                     <h6 class="fw-semibold mb-0">#</h6>
                                 </th>
                                 <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Nombre</h6>
+                                    <h6 class="fw-semibold mb-0">Nombre del hotel</h6>
                                 </th>
                                 <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Ciudad</h6>
+                                    <h6 class="fw-semibold mb-0">Nombre del cliente</h6>
                                 </th>
                                 <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Estrellas</h6>
+                                    <h6 class="fw-semibold mb-0">Fecha de entrada</h6>
                                 </th>
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Fecha de salida</h6>
+                                </th>
+
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Opciones</h6>
                                 </th>
@@ -57,21 +61,28 @@
                 </div>
                 <div class="modal-body">
 
-                    <input type="hidden" name="ID_hotel " id="ID_hotel ">
+                    <input type="hidden" name="ID_reserva  " id="ID_reserva  ">
+                    
 
-
-                  
                     <div class="form-group">
-                        <label for="hotel">Nombre del Hotel</label>
-                        <input type="text" required class="form-control" id="hotel" name="hotel" placeholder="Ingrese el nombre del Hotel">
+                        <label for="ID_hotel">Hotel</label>
+                      <select name="ID_hotel" id="ID_hotel" class="form-control">
+                        <option value="0">Seleccione un Hotel</option>
+                      </select>
                     </div>
                     <div class="form-group">
-                        <label for="ciudad">Nombre de la Ciudad</label>
-                        <input type="text" required class="form-control" id="ciudad" name="ciudad" placeholder="Ingrese el nombre de la ciudad">
+                        <label for="ID_cliente ">Cliente</label>
+                      <select name="ID_cliente " id="ID_cliente " class="form-control">
+                        <option value="0">Seleccione un Cliente</option>
+                      </select>
                     </div>
                     <div class="form-group">
-                        <label for="estrellas">Cantidad de Estrellas</label>
-                        <input type="text" required class="form-control" id="estrellas" name="estrellas" placeholder="Cantidad de estrellas">
+                        <label for="ciudad">fecha de entrada</label>
+                        <input type="date" required class="form-control" id="ciudad" name="ciudad" placeholder="Ingrese el nombre de la ciudad">
+                    </div>
+                    <div class="form-group">
+                        <label for="estrellas">fecha de salida</label>
+                        <input type="date" required class="form-control" id="estrellas" name="estrellas" placeholder="Cantidad de estrellas">
                     </div>
                    
 
