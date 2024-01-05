@@ -5,8 +5,6 @@ function init(){
         guardaryeditar(e);
     });
 }
-
-
 $().ready(()=>{
     todos();
 });
@@ -14,8 +12,6 @@ $().ready(()=>{
 var todos = () =>{
     var html = "";
     $.get("../../Controllers/hoteles.controller.php?op=todos", (res) => {
-      
-      
       res = JSON.parse(res);
       $.each(res, (index, valor) => {
        
@@ -48,44 +44,44 @@ var todos = () =>{
     var ruta = '';
     var ID_hotel = document.getElementById("ID_hotel").value
     if(ID_hotel > 0){
-     ruta = "../../Controllers/hoteles.controller.php?op=actualizar"
+        ruta = "../../Controllers/hoteles.controller.php?op=actualizar"
     }else{
         ruta = "../../Controllers/hoteles.controller.php?op=insertar"
     }
+
     $.ajax({
         url: ruta,
         type: "POST",
         data: dato,
         contentType: false,
         processData: false,
-        success: function (res) {
+        success: function(res){
+          console.log(res);
 
-          
           res = JSON.parse(res);
-          if (res == "ok") {
-            Swal.fire("HOTELES", "Registrado con éxito" , "success");
-            todos();
-            limpia_Cajas();
-          } else {
-            Swal.fire("HOTELES", "Error al guardo, intente mas tarde", "error");
-          }
-        },
-      });
-  }
-
+          if (res == "ok"){
+            Swal.fire("HOTELES", "HOTELES Guardado", "success");
+          todos();
+          limpia_Cajas();
+        }
+          else{
+            Swal.fire("HOTELES", "HOTELES no Guardado", "error");
+           }
+        },      
+        
+    });
+}
   var editar = (ID_hotel)=>{
-  
-    $.post(
+      $.post(
       "../../Controllers/hoteles.controller.php?op=uno",
       { ID_hotel: ID_hotel },
       (res) => {
-        res = JSON.parse(res);
         console.log(res);
+        res = JSON.parse(res);        
         $("#ID_hotel").val(res.ID_hotel);
         $("#Nombre").val(res.Nombre);
         $("#Ciudad").val(res.Ciudad);
-        $("#Estrellas").val(res.Estrellas);
-    
+        $("#Estrellas").val(res.Estrellas);    
       }
     );
     $("#Modal_hoteles").modal("show");
@@ -119,7 +115,7 @@ var todos = () =>{
         }
       });
   
-      impia_Cajas();
+      limpia_Cajas();
 }
   
   var limpia_Cajas = ()=>{

@@ -49,7 +49,7 @@ class Clase_Hoteles
         try {
             $con = new Clase_Conectar_Base_Datos();
             $con = $con->ProcedimientoConectar();
-            $cadena = "UPDATE `hoteles` SET `Nombre`='$Nombre', `Ciudad`=$Ciudad, `Estrellas`=$Estrellas WHERE `ID_hotel`='$ID_hotel'";
+            $cadena = "UPDATE `hoteles` SET `Nombre`='$Nombre', `Ciudad`='$Ciudad', `Estrellas`='$Estrellas' WHERE ID_hotel=$ID_hotel";
             $result = mysqli_query($con, $cadena);
             return "ok";
         } catch (Throwable $th) {
@@ -63,7 +63,7 @@ class Clase_Hoteles
         try {
             $con = new Clase_Conectar_Base_Datos();
             $con = $con->ProcedimientoConectar();
-            $cadena = "delete from hoteles where ID_hotel=$ID_hotel";
+            $cadena = "DELETE FROM `hoteles` where ID_hotel=$ID_hotel";
             $result = mysqli_query($con, $cadena);
             return "ok";
         } catch (Throwable $th) {

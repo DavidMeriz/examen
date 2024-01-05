@@ -53,7 +53,7 @@
                 <div class="modal-body">
                     <input type="hidden" name="ID_hotel" id="ID_hotel">
                     <div class="form-group">
-                        <label for="nombre">Nombre del Hotel</label>
+                        <label for="Nombre">Nombre del Hotel</label>
                         <input type="text" required class="form-control" id="Nombre" name="Nombre" placeholder="Ingrese el nombre del hotel">
                     </div>
                     <div class="form-group">
@@ -61,7 +61,7 @@
                         <input type="text" required class="form-control" id="Ciudad" name="Ciudad" placeholder="Ingrese la ciudad">
                     </div>
                     <div class="form-group">
-                        <label for="estrellas">Estrellas</label>
+                        <label for="Estrellas">Estrellas</label>
                         <input type="number" required class="form-control" id="Estrellas" name="Estrellas" placeholder="Ingrese el número de estrellas">
                     </div>
                 </div>
@@ -75,4 +75,5 @@
 </div>
 
 <?php require_once('../html/script2.php') ?>
+
 <script src="hoteles.js"></script>
