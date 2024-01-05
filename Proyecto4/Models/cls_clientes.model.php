@@ -35,7 +35,7 @@ class Clase_Clientes
         try {
             $con = new Clase_Conectar_Base_Datos();
             $con = $con->ProcedimientoConectar();
-            $cadena = "INSERT INTO `clientes`(`Nombre`)(`Apellido`) VALUES ('$Nombre') ('$Apellido')";
+            $cadena = "INSERT INTO `clientes`(`Nombre`,`Apellido`) VALUES ('$Nombre','$Apellido')";
             $result = mysqli_query($con, $cadena);
             return 'ok';
         } catch (Throwable $th) {
@@ -49,7 +49,7 @@ class Clase_Clientes
         try {
             $con = new Clase_Conectar_Base_Datos();
             $con = $con->ProcedimientoConectar();
-            $cadena = "UPDATE `clientes` SET `Nombre`='$Nombre',`Apellido`='$Apellido' WHERE `ID_cliente`='$ID_cliente'";
+            $cadena = "UPDATE `clientes` SET `Nombre`='$Nombre',`Apellido`='$Apellido' WHERE ID_cliente=$ID_cliente";
             $result = mysqli_query($con, $cadena);
             return "ok";
         } catch (Throwable $th) {

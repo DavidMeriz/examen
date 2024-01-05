@@ -1,126 +1,167 @@
 //aqui va a estar el codigo de usuarios.model.js
 
 function init(){
-    $("#frm_hoteles").on("submit", function(e){
-        guardaryeditar(e);
-    });
+  $("#frm_reservas").on("submit", function(e){
+      guardaryeditar(e);
+  });
 }
-
-
 $().ready(()=>{
-    todos();
+  todos();
 });
-
-var todos = () =>{
-    var html = "";
-    $.get("../../Controllers/hoteles.controller.php?op=todos", (res) => {
-        console.log(res);
-      
+var cargaHoteles = () =>{
+  return new Promise ((resolve,reject)=>{
+    $.post("../../Controllers/hoteles.controller.php?op=todos", (res) => {
       res = JSON.parse(res);
-      $.each(res, (index, valor) => {
-       
-        html += `<tr>
-                <td>${index + 1}</td>
-                <td>${valor.Nombre}</td>
-                <td>${valor.Ciudad}</td>
-                <td>${valor.Estrellas}</td>
-
-            <td>
-            <button class='btn btn-success' onclick='editar(${
-              valor.ID_hotel
-            })'>Editar</button>
-            <button class='btn btn-danger' onclick='eliminar(${
-              valor.ID_hotel
-            })'>Eliminar</button>
-            <button class='btn btn-info' onclick='ver(${
-              valor.ID_hotel
-            })'>Ver</button>
-            </td></tr>
-                `;
+      var html = "";
+      $.each(res, (index, val) => {
+        html += `<option value="${val.ID_hotel}">${val.Nombre}</option>`;
       });
-      $("#tabla_hoteles").html(html);
+      $("#ID_hotel").html(html);
+      resolve();
+    }).fail((error)=>{
+      reject(error);
     });
-  };
-  
-  var guardaryeditar=(e)=>{
-    e.preventDefault();
-    var dato = new FormData($("#frm_hoteles")[0]);
-    var ruta = '';
-    var ID_hotel = document.getElementById("ID_hotel").value
-    if(ID_hotel > 0){
-     ruta = "../../Controllers/hoteles.controller.php?op=actualizar"
-    }else{
-        ruta = "../../Controllers/hoteles.controller.php?op=insertar"
-    }
-    $.ajax({
-        url: ruta,
-        type: "POST",
-        data: dato,
-        contentType: false,
-        processData: false,
-        success: function (res) {
-          res = JSON.parse(res);
-          if (res == "ok") {
-            Swal.fire("hoteles", "Registrado con éxito" , "success");
-            todos();
-            limpia_Cajas();
-          } else {
-            Swal.fire("usuarios", "Error al guardo, intente mas rtarde", "error");
-          }
-        },
-      });
-  }
+  });
 
-  var editar = (ID_hotel)=>{
-  
-    $.post(
-      "../../Controllers/hoteles.controller.php?op=uno",
-      { ID_hotel: ID_hotel },
-      (res) => {
-        res = JSON.parse(res);
-        $("#ID_hotel").val(res.ID_hotel);
-        $("#Nombre").val(res.Nombre);
-    
-      }
-    );
-    $("#Modal_hoteles").modal("show");
-  }
-
-
-  var eliminar = (ID_hotel)=>{
-    Swal.fire({
-        title: "hoteles",
-        text: "Esta seguro de eliminar el pais",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#3085d6",
-        confirmButtonText: "Eliminar",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          $.post(
-            "../../Controllers/hoteles.controller.php?op=eliminar",
-            { ID_hotel: ID_hotel },
-            (res) => {
-              res = JSON.parse(res);
-              if (res === "ok") {
-                Swal.fire("hoteles", "Pais Eliminado", "success");
-                todos();
-              } else {
-                Swal.fire("Error", res, "error");
-              }
-            }
-          );
-        }
-      });
-  
-      impia_Cajas();
 }
-  
-  var limpia_Cajas = ()=>{
-    document.getElementById("ID_hotel").value = "";
-    document.getElementById("Nombre").value = "";
-    $("#Modal_paises").modal("hide");
-  
+
+var cargaClientes = () =>{
+  return new Promise ((resolve,reject)=>{
+    $.post("../../Controllers/clientes.controller.php?op=todos", (res) => {
+      res = JSON.parse(res);
+      var html = "";
+      $.each(res, (index, val) => {
+        html += `<option value="${val.ID_Cliente}">${val.Nombre}</option>`;
+      });
+      $("#ID_Cliente").html(html);
+      resolve();
+    }).fail((error)=>{
+      reject(error);
+    });
+  });
+
+}
+var todos = () =>{
+  var html = "";
+  $.get("../../Controllers/reservas.controller.php?op=todos", (res) => {
+    console.log();
+    res = JSON.parse(res);
+    
+    $.each(res, (index, valor) => {
+     
+      html += `<tr>
+              <td>${index + 1}</td>
+              <td>${valor.Hotel}</td>
+              <td>${valor.Cliente}</td>
+              <td>${valor.Fecha_entrada}</td>
+              <td>${valor.Fecha_salida}</td>
+
+          <td>
+          <button class='btn btn-success' onclick='editar(${
+            valor.ID_reserva 
+          })'>Editar</button>
+          <button class='btn btn-danger' onclick='eliminar(${
+            valor.ID_reserva 
+          })'>Eliminar</button>
+          <button class='btn btn-info' onclick='ver(${
+            valor.ID_reserva 
+          })'>Ver</button>
+          </td></tr>
+              `;
+    });
+    $("#tabla_reservas").html(html);
+  });
+};
+
+var guardaryeditar=(e)=>{
+  e.preventDefault();
+  var dato = new FormData($("#frm_reservas")[0]);
+  var ruta = '';
+  var ID_reserva  = document.getElementById("ID_reserva ").value
+  if(ID_reserva  > 0){
+      ruta = "../../Controllers/reservas.controller.php?op=actualizar"
+  }else{
+      ruta = "../../Controllers/reservas.controller.php?op=insertar"
   }
-  init();
+
+  $.ajax({
+      url: ruta,
+      type: "POST",
+      data: dato,
+      contentType: false,
+      processData: false,
+      success: function(res){
+        console.log(res);
+
+        res = JSON.parse(res);
+        if (res == "ok"){
+          Swal.fire("reservas", "reservas Guardado", "success");
+        todos();
+        limpia_Cajas();
+      }
+        else{
+          Swal.fire("reservas", "reservas no Guardado", "error");
+         }
+      },      
+      
+  });
+}
+
+var editar = (ID_reserva )=>{
+  cargaHoteles();
+    $.post(
+    "../../Controllers/reservas.controller.php?op=uno",
+    { ID_reserva : ID_reserva  },
+    (res) => {
+      console.log(res);
+      res = JSON.parse(res);        
+      $("#ID_reserva ").val(res.ID_reserva );
+      $("#ID_hotel").val(res.ID_hotel);
+      $("#ID_Cliente").val(res.ID_Cliente);
+      $("#Fecha_entrada").val(res.Fecha_entrada);
+      $("#Fecha_salida").val(res.Fecha_salida);
+    }
+  );
+  $("#Modal_reservas").modal("show");
+}
+
+var eliminar = (ID_reserva )=>{
+  Swal.fire({
+      title: "reservas",
+      text: "Esta seguro de eliminar el reservas",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Eliminar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.post(
+          "../../Controllers/reservas.controller.php?op=eliminar",
+          { ID_reserva : ID_reserva  },
+          (res) => {
+            res = JSON.parse(res);
+            if (res === "ok") {
+              Swal.fire("reservas", "reservas Eliminado", "success");
+              todos();
+            } else {
+              Swal.fire("Error", res, "error");
+            }
+          }
+        );
+      }
+    });
+
+    limpia_Cajas();
+}
+
+var limpia_Cajas = ()=>{
+  document.getElementById("ID_reserva ").value = "";
+  document.getElementById("ID_hotel").value = "";
+  document.getElementById("ID_cliente").value = "";
+  document.getElementById("Fecha_entrada").value = "";
+  document.getElementById("Fecha_salida").value = "";
+  $("#Modal_reserva").modal("hide");
+
+}
+init();

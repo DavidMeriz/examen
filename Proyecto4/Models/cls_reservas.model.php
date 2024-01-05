@@ -7,7 +7,16 @@ class Clase_Reservas
         try {
             $con = new Clase_Conectar_Base_Datos();
             $con = $con->ProcedimientoConectar();
-            $cadena = "SELECT * FROM `reservas`";
+            $cadena = "SELECT 
+                reservas.ID_reserva,
+                hoteles.Nombre AS Hotel,
+                clientes.Nombre AS Cliente,
+                reservas.Fecha_entrada,
+                reservas.Fecha_salida
+            FROM reservas
+            INNER JOIN hoteles ON reservas.ID_hotel = hoteles.ID_hotel
+            INNER JOIN clientes ON reservas.ID_cliente = clientes.ID_cliente;
+            ";
             $result = mysqli_query($con, $cadena);
             return $result;
         } catch (Throwable $th) {
@@ -16,6 +25,7 @@ class Clase_Reservas
             $con->close();
         }
     }
+    
     public function uno($ID_reserva  )
     {
         try {

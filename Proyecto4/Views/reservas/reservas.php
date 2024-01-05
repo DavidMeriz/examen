@@ -8,7 +8,7 @@
                 <h5 class="card-title fw-semibold mb-4">Lista de reservas</h5>
 
                 <div class="table-responsive">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal_reservas">
+                    <button type="button" onclick="cargaHoteles()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal_reservas">
                         Nueva reserva
                     </button>
                     <table class="table text-nowrap mb-0 align-middle">
