@@ -121,7 +121,6 @@ var eliminar = (ID_reserva) => {
   });
   limpia_Cajas();
 };
-
 var limpia_Cajas = () => {
   document.getElementById("ID_reserva").value = "";
   document.getElementById("ID_hotel").value = "";
