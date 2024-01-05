@@ -119,7 +119,6 @@ var eliminar = (ID_reserva) => {
       );
     }
   });
-
   limpia_Cajas();
 };
 
